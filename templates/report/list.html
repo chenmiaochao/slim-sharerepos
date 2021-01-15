@@ -1,0 +1,82 @@
+{#
+    /**
+    * PH34 マスタ管理mvc src15/18
+    * 部門情報リスト画面
+    *
+    *@author chen rongchao
+    */
+    #}
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>レポート情報リスト</title>
+    <link rel="stylesheet" href="/ph34/sharereports/public/css/main.css" type="text/css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container">
+    
+    <header class="jumbotron jumbotron-fluid"> 
+        <div class="container">   
+            <h1 class="display-4">レポート情報リスト</h1>
+            <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;{{userName}}
+            </p>
+            <button class="lead"><a href="/ph34/sharereports/public/logout">ログアウト</a></button>
+
+        </div>
+        <hr class="my-4">
+        <p class="lead">
+            新規登録<a class="btn btn-primary btn-lg" href="/ph34/sharereports/public/reports/goAdd" role="button">こちらから</a>
+          </p>
+    </header>
+
+    <nav id="breadcrumbs">
+        <ul>
+            <li>レポート情報リスト</li>
+
+        </ul>
+    </nav>
+
+    {% if flashMsg %}
+    <section id="flashMsg" class="jumbotron">
+        <p class="display-4 text-center">{{flashMsg}}</p>
+    </section> 
+    {% endif %}
+
+    <section>
+        <table class="table table-bordered table-condensed">
+            <thead>
+                <tr>
+                    <th>作業日</th>
+                    <th>報告者</th>
+                    <th>内容</th>
+                    <th colspan="2">詳細</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for repoId, repo in repoList %}
+                <tr>
+
+                    <td>{{repo.rpDate}}</td>
+                    <td>{{userNameList[repo.userId]}}</td>
+                    <td>{{repo.rpContent|length > 10 ? repo.rpContent|slice(0, 10) ~ '…' : repo.rpContent}}</td>
+                    <td>
+                        <a href="/ph34/sharereports/public/reports/detail/{{repoId}}">詳細</a>
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="5">該当部門は存在しません。</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
+</div>
+</body>
+</html>

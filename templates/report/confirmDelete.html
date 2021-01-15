@@ -1,0 +1,115 @@
+{#
+    /**
+    * PH34 sample8 mvc 17/18
+    *
+    *
+    */
+    #}
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="/ph34/scottadminslim/public/css/main.css" type="text/css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>レポート情報削除</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container">
+        <header class="jumbotron jumbotron-fluid"> 
+            <div class="container">   
+                <h1 class="display-4">レポート情報削除</h1>
+                <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;{{userName}}
+                </p>
+                <button class="lead"><a href="/ph34/sharereports/public/logout">ログアウト</a></button>
+            </div>
+        </header>
+
+    
+        <nav id="breadcrumbs">
+            <ul>
+                <li><a 
+    href="/ph34/sharereports/public/reports/list">レポートリスト</a></li>
+    <li>レポート詳細</li>
+                <li>レポート情報削除</li>
+            </ul>
+        </nav>
+        {%if validationMsgs %}
+        <section id="errorMsg">
+            <p>以下のメッセージをご確認ください</p>
+            <ul>
+                {%for msg in validationMsgs %}
+                <li>{{msg}}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+        <section>
+            <p>
+                情報を入力し、登録ボタンをクリックしてください。
+            </p>
+            <form action="/ph34/sharereports/public/reports/delete" method="POST" class="box">
+                <div class="form-group container text-center">
+                    <label for="deleteRpId" class=" display-4">レポートID:&nbsp;&nbsp;{{report.Id}}            </label>
+                        <input type="hidden" name="deleteRpId" id="deleteRpId" value="{{report.Id}}">
+                </div>
+
+                <div class="form-group container text-center">
+
+                <label for="deleteRpDate">
+                    作業日&nbsp;         
+                </label>
+                <p>{{deleteRpCreatedAt['year']}}年{{deleteRpCreatedAt['month']}}月{{deleteRpCreatedAt['date']}}日</p>
+                    
+
+                </div>
+    
+                <div class="form-group container text-center">
+
+                <label for="rpTimeFrom">
+                    作業開始時間&nbsp;
+                </label>
+
+                    <p>{{deleteTimeFrom['hour']}}時{{deleteTimeFrom['minute']}}分</p>        
+                </div><br>
+    
+                <div class="form-group container text-center">
+
+                <label for="rpTimeTo">
+                    作業終了時間&nbsp;
+                </label>
+
+                    <p>{{deleteTimeTo['hour']}}時{{deleteTimeTo['minute']}}分</p>        
+
+                </div>
+                <br>
+    
+                <div class="form-group container text-center">
+
+
+                <label for="deleteReportcateId">                            作業種類id&nbsp;        </label>
+
+                    <p>{{report.reportcateId}}:{{reportcate.getRcName}}</p>        
+
+                </div><br>
+    
+                <div class="form-group container text-center">
+
+                <label for="deleteRpContent">
+                    本文&nbsp;
+                </label>
+<p style="white-space: pre-wrap;" >{{report.getRpContent}}</p>
+
+                </div><br>
+    
+    
+    
+                <button type="submit" class="list-group-item list-group-item-action list-group-item-info rounded-lg text-center">削除</button>
+            </form>
+        </section>
+    </div>
+    </body>
+    </html>

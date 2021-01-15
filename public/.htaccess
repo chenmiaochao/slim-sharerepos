@@ -1,0 +1,11 @@
+# PH34 sample13 マスタテーブル管理 src02
+#
+# .htaccess
+#
+# filename = .htaccess
+# directory =/ph34/sharereports/public
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^ index.php [QSA,L]

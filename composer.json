@@ -1,0 +1,11 @@
+{
+    "require": {
+        "slim/slim": "^4.5",
+        "slim/psr7": "^1.2",
+        "slim/twig-view": "^3.1",
+        "slim/flash": "^0.4.0"
+    },
+    "autoload": {
+        "psr-4": {"LocalHalPH34\\ShareReports\\Classes\\": "classes/"}
+    }
+}

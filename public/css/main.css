@@ -1,0 +1,50 @@
+/**
+ * PH34 サンプル3　マスタテーブル管理DAO src 03/12　　
+ *
+ * css
+ *
+ * @author chen rongchao *  
+ * file name=main.css
+ * directory=/ph34/scottadmindao/public/css/
+ */
+@charset "utf-8";
+.container{
+    max-width: 1920px;
+}
+table  {
+    border-collapse: collapse;
+}
+th, td {
+    border: solid 1px black;
+}
+#breadcrumbs ul li {
+    display: inline;
+    list-style-type: none;
+}
+#breadcrumbs {
+    margin-left: 0px;
+}
+#breadcrumbs ul{
+    padding-left: 0px;
+}
+#breadcrumbs ul .current {
+    color: red;
+}
+#breadcrumbs ul li:before{
+    content: " > ";
+}
+#breadcrumbs ul li:first-child:before{
+    content :none;
+}
+.required {
+    color: red;
+    font-size: 12px;
+}
+#errorMsg{
+    border: solid green 1px;
+    padding: 10px;
+}
+#flashMsg{
+    border: solid red 1px;
+    padding: 10px;
+}

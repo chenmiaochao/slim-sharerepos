@@ -1,0 +1,58 @@
+{#
+    /*
+     *PH34 09 14/20
+     *top画面
+     *
+     *filename=login.html
+     *diretery=/ph34/sharereports/templates
+     *
+     *
+    #}
+    <!DOCTYPE html>
+    <html lang="ja">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>login sharereports</title>
+        <link rel="stylesheet" href="/ph34/sharereports/public/css/main.css" type="text/css">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    
+    </head>
+    <body>
+    <div class="container jumbotron">
+        <div class="container">
+        <h1>ログイン</h1>
+        {% if validationMsgs %}
+        </div>
+        <section id="flashMsg" class="jumbotron">
+            <p>以下のメッセージをご確認ください</p>
+            <ul>
+                {% for msg in validationMsgs %}
+                <li>{{msg}}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+        <section class="container">
+            <p>idとパスワードを入力してください</p>
+            <form action="/ph34/sharereports/public/login" method="POST">
+                <div class="form-group">
+                    <label for="loginEmail">Email address</label>
+                    <input type="text" id="loginEmail" name="loginEmail" value="{{loginEmail}}" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="loginPw">Password</label>
+                    <input type="password" id="loginPw" name="loginPw" required>
+                  
+                </div>
+                <button type="submit" class="btn btn-primary">ログイン</button>
+
+            </form>
+        </section>
+    </div>
+    </body>
+    </html>

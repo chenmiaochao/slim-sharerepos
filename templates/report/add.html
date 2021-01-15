@@ -1,0 +1,154 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/ph34/sharereports/public/css/main.css" type="text/css">
+    <title>情報追加 | sharereports</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+</head>
+<body>
+<div class="container">
+    <header class="jumbotron jumbotron-fluid"> 
+        <div class="container">   
+            <h1 class="display-4">レポート情報追加</h1>
+            <p class="lead">&nbsp;&nbsp;&nbsp;&nbsp;{{userName}}
+            </p>
+            <button class="lead"><a href="/ph34/sharereports/public/logout">ログアウト</a></button>
+        </div>
+    </header>
+
+
+    <nav id="breadcrumbs">
+        <ul>
+            <li><a href="/ph34/sharereports/public/reports/list">レポートリスト</a></li>
+            <li>レポート情報追加</li>
+        </ul>
+    </nav>
+    {% if flashMsg %}
+    <section id="flashMsg" class="jumbotron">
+        <p>{{flashMsg}}</p>
+    </section> 
+    {% endif %}
+    {% if validationMsgs %}
+    <section id="errorMsg">
+        <p>
+            以下のメッセージをご確認ください。
+        </p>
+        <ul>
+            {% for msg in validationMsgs %}
+            <li>{{msg}}</li>
+            {% endfor %}
+        </ul>
+    </section>
+    {% endif %}
+    <section>
+        <p>
+            情報を入力し、登録ボタンをクリックしてください。
+        </p>
+        <form action="/ph34/sharereports/public/reports/add" method="POST" class="box">
+            <div class="form-group container text-center">
+
+            <label for="addRpDate">
+                作業日&nbsp;<span class="required">必須</span>            
+            </label>
+                <select class="form-control" name="addReportYear" id="addReportYear">
+                    <option value="">選択してください</option>
+                    {% for  year in minWorkYear..2020    %}
+                    <option value="{{year}}" {% if(year == valiTime['year'] ) %} selected {% elseif( year == addTime['year']) %} selected {% endif %}>{{year}}</option>
+                    {% endfor %}
+                </select>年
+
+                <select class="form-control" name="addReportMonth" id="addReportMonth">
+                    <option value="">選択してください</option>
+                    {% for month in month..12 %}
+                    <option value="{{month}}" {% if(month == valiTime['month']) %} selected {% elseif(month == addTime['month']) %} selected {% endif %}>{{month}}</option>
+                    {% endfor %}
+                </select>月
+
+
+                <select class="form-control" name="addReportDate" id="addReportDate">
+                    <option value="">選択してください</option>
+                    {% for date in date..31 %}
+                    <option value="{{date}}" {% if(date == valiTime['date']) %} selected {% elseif(date == addTime['date']) %} selected {% endif %}>{{date}}</option>
+                    {% endfor %}
+                </select>日
+
+            </div><br>
+
+            <div class="form-group container text-center">
+
+            <label for="rpTimeFrom">
+                作業開始時間&nbsp;<span class="required">必須</span>                </label>        
+                <select class="form-control" name="addRpTimeFromHour" id="addRpTimeFromHour">
+                    <option value="">選択してください</option>
+                    {% for  hour in hour..23    %}
+                    <option value="{{hour}}" {% if(hour == valiTimeFrom['hour']) %} selected {% elseif(hour == addTimeFrom['hour']) %}selected{% endif %}>{{hour}}</option>
+                    {% endfor %}
+                </select>時
+
+                <select class="form-control" name="addRpTimeFromMinute" id="addRpTimeFromMinute">
+                    <option value="">選択してください</option>
+                    {% for minute in minute..59 %}
+                    <option value="{{minute}}" {% if(minute == valiTimeFrom['minute']) %} selected {% elseif(minute == addTimeFrom['minute']) %}selected{% endif %}>{{minute}}</option>
+                    {% endfor %}
+                </select>分
+
+            </div><br>
+
+            <div class="form-group container text-center">
+
+            <label for="rpTimeTo">
+                作業終了時間&nbsp;<span class="required">必須</span>    </label>        
+                <select class="form-control" name="addRpTimeToHour" id="addRpTimeToHour">
+                    <option value="">選択してください</option>
+                    {% for  hour in hour..23    %}
+                    <option value="{{hour}}" {% if(hour == valiTimeTo['hour']) %} selected {% elseif(hour == addTimeTo['hour']) %}selected{% endif %}>{{hour}}</option>
+                    {% endfor %}
+                </select>時
+
+                <select class="form-control" name="addRpTimeToMinute" id="addRpTimeToMinute">
+                    <option value="">選択してください</option>
+                    {% for minute in minute..59 %}
+                    <option value="{{minute}}" {% if(minute == valiTimeTo['minute']) %} selected {% elseif(minute == addTimeTo['minute']) %}selected{% endif %}>{{minute}}</option>
+                    {% endfor %}
+                </select>分
+            </div>
+            <br>
+
+            <div class="form-group container text-center">
+
+            <label for="addReportcateId">
+                作業種類id&nbsp;<span class="required">必須</span>          </label>  
+            <select class="form-control" name="addReportcateId" id="addReportcateId" required>
+                <option value="">選択してください</option>
+                {% for reportcateId, reportcate in reportcateList %}
+                <option value="{{reportcateId}}" {% if(reportcateId == valiReportcateId) %} selected {% endif %}>{{reportcateId}}:{{reportcate.getRcName}}</option>
+                {% endfor %}
+            </select>
+            </div>
+            <br>
+
+            <div class="form-group container text-center">
+
+            <label for="addRpContent">
+                本文&nbsp;<span class="required">必須</span>            </label>
+                <textarea class="form-control" rows="3" type="text" id="addRpContent" name="addRpContent"  style="white-space: pre-wrap;" required>{{report.rpContent}}</textarea>
+
+            </div>
+            <br>
+
+
+
+            <button type="submit" class="list-group-item list-group-item-action list-group-item-info rounded-lg text-center">登録</button>
+        </form>
+    </section>
+</div>
+</body>
+
+</html>
